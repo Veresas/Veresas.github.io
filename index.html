@@ -5,19 +5,24 @@
 </head>
 <body>
   <h1 id="message">Привет мир</h1>
+  <button id="requestButton">Сделать запрос к серверу</button>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      const serverIP = '217.66.154.81'; // здесь замените на реальный IP вашего сервера
-      fetch(`http://${serverIP}:3000/getMessage`) // указываем IP и порт сервера
-        .then(response => response.json())
-        .then(data => {
-          const messageElement = document.getElementById('message');
-          messageElement.innerText = data.message;
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
+      const serverIP = '217.66.154.81'; // замените на реальный IP вашего сервера
+      const requestButton = document.getElementById('requestButton');
+      const messageElement = document.getElementById('message');
+
+      requestButton.addEventListener('click', function() {
+        fetch(`http://${serverIP}:3000/getMessage`)
+          .then(response => response.json())
+          .then(data => {
+            messageElement.innerText = data.message;
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      });
     });
   </script>
 </body>
