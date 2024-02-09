@@ -1,1 +1,24 @@
-hello
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Привет мир</title>
+</head>
+<body>
+  <h1 id="message">Привет мир</h1>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const serverIP = '123.456.78.90'; // здесь замените на реальный IP вашего сервера
+      fetch(`http://${serverIP}:3000/getMessage`) // указываем IP и порт сервера
+        .then(response => response.json())
+        .then(data => {
+          const messageElement = document.getElementById('message');
+          messageElement.innerText = data.message;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    });
+  </script>
+</body>
+</html>
